@@ -6,7 +6,7 @@ using System.Web;
 
 namespace DripScript.Models
 {
-    public class JournalEntry : DSUser
+    public class JournalEntry
     {
         [Key]
         public int EntryId { get; set; }
@@ -14,7 +14,7 @@ namespace DripScript.Models
         [Required]
         public string Body { get; set; }
         public DateTime Date { get; set; }
-        public string Author { get { return FirstName + " " + LastName; }}
+        public virtual DSUser Author { get; set; }
         public bool isPublic()
         {
             return true;
