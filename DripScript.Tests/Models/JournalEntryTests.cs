@@ -15,48 +15,18 @@ namespace DripScript.Tests.Models
         }
 
         [TestMethod]
-        public void JournalEntryEnsureEntryHasEntryId()
+        public void JournalEntryEnsureEntryHasAllThings()
         {
             // Arrange
             JournalEntry entry = new JournalEntry();
-            int expected = 1234;
-
-            // Act
             entry.EntryId = 1234;
-            int actual = entry.EntryId;
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void JournalEntryEnsureEntryHasTitle()
-        {
-            // Arrange
-            JournalEntry entry = new JournalEntry();
-            string expected = "My New Journal";
-
-            // Act
             entry.Title = "My New Journal";
-            string actual = entry.Title;
-
-            // Assert
-            Assert.AreEqual(expected, actual);
-        }
-
-        [TestMethod]
-        public void JournalEntryEnsureEntryHasBody()
-        {
-            // Arrange
-            JournalEntry entry = new JournalEntry();
-            string expected = "I like to swin in the summer time.";
-
-            // Act
             entry.Body = "I like to swin in the summer time.";
-            string actual = entry.Body;
 
             // Assert
-            Assert.AreEqual(expected, actual);
+            Assert.AreEqual(1234, entry.EntryId);
+            Assert.AreEqual("My New Journal", entry.Title);
+            Assert.AreEqual("I like to swin in the summer time.", entry.Body);
         }
 
         [TestMethod]
