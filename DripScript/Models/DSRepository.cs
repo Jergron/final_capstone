@@ -9,11 +9,17 @@ namespace DripScript.Models
     public class DSRepository
     {
         private DSContext _context;
-        public DSContext Context { get { return _context; } }
 
+        public DSContext Context { get { return _context; } }
+        
         public DSRepository()
         {
             _context = new DSContext();
+        }
+
+        public DSRepository(DSContext a_context)
+        {
+            _context = a_context;
         }
 
         public List<DSUser> GetAllUsers()
@@ -40,20 +46,10 @@ namespace DripScript.Models
             return found_user.Entries;
         }
 
-        public List<DSUser> SearchByName(string search_term)
-        {
-            var query = from user in _context.DSUsers select user;
-            List<DSUser> found_users = query.Where(user => Regex.IsMatch(user.FirstName, search_term, RegexOptions.IgnoreCase) || Regex.IsMatch(user.LastName, search_term, RegexOptions.IgnoreCase)).ToList();
-            found_users.Sort();
-            return found_users;
-        }
-
         public List<JournalEntry> GetAllEntries()
         {
             var query = from entry in _context.Entries select entry;
-            List<JournalEntry> found_entries = query.ToList();
-            found_entries.Sort();
-            return found_entries;
+            return query.ToList();
         }
 
         public bool CreateEntry(DSUser dripscript_user, string content, string title)
