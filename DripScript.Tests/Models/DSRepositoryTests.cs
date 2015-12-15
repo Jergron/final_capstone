@@ -96,18 +96,45 @@ namespace DripScript.Tests.Models
 
             };
 
- 
-
             mock_set.Object.AddRange(expected);
-
             ConnectMocksToDataStore(expected);
            
-
             // Act
             var actual = repository.GetAllEntries();
 
             // Assert
             CollectionAssert.AreEqual(expected, actual);
+        }
+
+        [TestMethod]
+        public void DSRepositoryEnsureICanSearchByTitle()
+        {
+            // Arrange
+            var expected = new List<JournalEntry>
+            {
+                new JournalEntry {Title = "Hello Love" },
+                new JournalEntry {Title = "What are you waiting for?" },
+                new JournalEntry {Title = "Big mistake" },
+                new JournalEntry {Title = "You crack me up" },
+                new JournalEntry {Title = "Love Language" }
+
+            };
+
+            mock_set.Object.AddRange(expected);
+            ConnectMocksToDataStore(expected);
+
+            // Act
+            string title = "Love";
+            List<JournalEntry> expected_titles = new List<JournalEntry>
+            {
+                new JournalEntry {Title = "Hello Love" },
+                new JournalEntry {Title = "Love Language" }
+            };
+
+            List<JournalEntry> actual_titles = repository.SearchByTitle(title);
+            // Assert
+            Assert.AreEqual(expected_titles[0].Title, actual_titles[0].Title);
+            Assert.AreEqual(expected_titles[1].Title, actual_titles[1].Title);
         }
     }
 }
