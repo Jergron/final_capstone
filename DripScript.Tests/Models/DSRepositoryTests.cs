@@ -10,9 +10,53 @@ namespace DripScript.Tests.Models
 {
     [TestClass]
     public class DSRepositoryTests
-    {   
-        private DSRepository repository = new DSRepository();
+    {
+        Mock<DSContext> mock_context;
+        Mock<DbSet<DSUser>> mock_user_set;
+        Mock<DbSet<JournalEntry>> mock_set;
+        private DSRepository repository;
 
+        private void ConnectMocksToDataStore(IEnumerable<JournalEntry> data_store)
+        {
+            var data_source = data_store.AsQueryable();
+
+            mock_set.As<IQueryable<JournalEntry>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            mock_set.As<IQueryable<JournalEntry>>().Setup(data => data.Expression).Returns(data_source.Expression);
+            mock_set.As<IQueryable<JournalEntry>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
+            mock_set.As<IQueryable<JournalEntry>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+
+            mock_context.Setup(e => e.Entries).Returns(mock_set.Object);
+        }
+
+        private void ConnectMocksToDataStore(IEnumerable<DSUser> data_store)
+        {
+            var data_source = data_store.AsQueryable();
+
+            mock_set.As<IQueryable<DSUser>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            mock_set.As<IQueryable<DSUser>>().Setup(data => data.Expression).Returns(data_source.Expression);
+            mock_set.As<IQueryable<DSUser>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
+            mock_set.As<IQueryable<DSUser>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+
+            mock_context.Setup(e => e.DSUsers).Returns(mock_user_set.Object);
+        }
+
+        [TestInitialize]
+        public void Initialize()
+        {
+            mock_context = new Mock<DSContext>();
+            mock_user_set = new Mock<DbSet<DSUser>>();
+            mock_set = new Mock<DbSet<JournalEntry>>();
+            repository = new DSRepository(mock_context.Object);
+        }
+
+        [TestCleanup]
+        public void Cleanup()
+        {
+            mock_context = null;
+            mock_set = null;
+            mock_user_set = null;
+            repository = null;
+        }
 
         [TestMethod]
         public void DSContextEnsureICanCreateInstance()
@@ -52,20 +96,12 @@ namespace DripScript.Tests.Models
 
             };
 
-            Mock<DSContext> mock_context = new Mock<DSContext>();
-
-            Mock<DbSet<JournalEntry>> mock_set = new Mock<DbSet<JournalEntry>>();
+ 
 
             mock_set.Object.AddRange(expected);
-            var data_source = expected.AsQueryable();
 
-            mock_set.As<IQueryable<JournalEntry>>().Setup(data => data.Provider).Returns(data_source.Provider);
-            mock_set.As<IQueryable<JournalEntry>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            mock_set.As<IQueryable<JournalEntry>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            mock_set.As<IQueryable<JournalEntry>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
-
-            mock_context.Setup(e => e.Entries).Returns(mock_set.Object);
-            DSRepository repository = new DSRepository(mock_context.Object);
+            ConnectMocksToDataStore(expected);
+           
 
             // Act
             var actual = repository.GetAllEntries();
