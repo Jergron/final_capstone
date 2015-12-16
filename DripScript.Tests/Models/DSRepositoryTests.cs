@@ -119,7 +119,6 @@ namespace DripScript.Tests.Models
                 new JournalEntry {Title = "Love Language" }
 
             };
-
             mock_set.Object.AddRange(expected);
             ConnectMocksToDataStore(expected);
 
@@ -130,11 +129,40 @@ namespace DripScript.Tests.Models
                 new JournalEntry {Title = "Hello Love" },
                 new JournalEntry {Title = "Love Language" }
             };
-
             List<JournalEntry> actual_titles = repository.SearchByTitle(title);
+
             // Assert
             Assert.AreEqual(expected_titles[0].Title, actual_titles[0].Title);
             Assert.AreEqual(expected_titles[1].Title, actual_titles[1].Title);
+        }
+
+        [TestMethod]
+        public void DSRepositoryEnsureICanSearchByDate()
+        {
+            // Arrange
+            var expected = new List<JournalEntry>
+            {
+                new JournalEntry {Date = DateTime.Parse("12/15/2015")},
+                new JournalEntry {Date = DateTime.Parse("December 15, 2015") },
+                new JournalEntry {Date = DateTime.Parse("12/15/2013") },
+                new JournalEntry {Date = DateTime.Parse("07/22/2013")}
+
+            };
+            mock_set.Object.AddRange(expected);
+            ConnectMocksToDataStore(expected);
+
+            // Act
+            string date = "12/15/2015";
+            List<JournalEntry> expected_dates = new List<JournalEntry>
+            {
+                new JournalEntry {Date = DateTime.Parse("12/15/2015")},
+                new JournalEntry {Date = DateTime.Parse("December 15, 2015") }
+            };
+            List<JournalEntry> actual_dates = repository.SearchByDate(date);
+
+            // Assert
+            Assert.AreEqual(expected_dates[0].Date, actual_dates[0].Date);
+            Assert.AreEqual(expected_dates[1].Date, actual_dates[1].Date);
         }
     }
 }
