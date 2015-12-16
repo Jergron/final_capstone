@@ -164,5 +164,24 @@ namespace DripScript.Tests.Models
             Assert.AreEqual(expected_dates[0].Date, actual_dates[0].Date);
             Assert.AreEqual(expected_dates[1].Date, actual_dates[1].Date);
         }
+
+        [TestMethod]
+        public void DSRepositoryEnsureICanCreateAJournalEntry()
+        {
+            // Arrange
+            List<JournalEntry> expected_entries = new List<JournalEntry>();
+            ConnectMocksToDataStore(expected_entries);
+            DSUser dripscript_user = new DSUser {FirstName = "Jeremy", LastName ="Grondahl" };
+            string title = "The Zombie Apocolypse";
+            string content = "London (AFP) - Are you afflicted by a shambling gait, a tendency to moan and the desire to bite and eat flesh? Watch out -- you could be becoming a zombie, according to the respected British Medical Journal (BMJ).A new article entitled 'Zombie infections: epidemiology, treatment and prevention' details everything from symptoms of infection-- 'people may clinically die and reanimate'-- to how 'zombiism' is transmitted -- 'via bite'.It urges more funding for research into zombie epidemics 'to tackle the looming threat of apocalyptic disease'.The study, by Tara Smith of Kent State University in the US, even comes with meticulous footnotes citing sources such as zombie movies '28 Days Later' and 'Night of the Living Dead'. A spokesman for the BMJ, one of the most respected forums for research in the medical world, explained that the article was part of a light-hearted tradition of running a special Christmas issue. 'All Christmas articles go thorough our usual peer-review processes,' the spokesman added. 'The subject matter is quirky and fun, but they use proper research methods and have to stand up scientifically.'";
+            mock_set.Setup(e => e.Add(It.IsAny<JournalEntry>())).Callback((JournalEntry s) => expected_entries.Add(s));
+
+            // Act
+            bool successful = repository.CreateEntry(dripscript_user, content, title);
+
+            // Assert
+            Assert.IsTrue(successful);
+            Assert.AreEqual(1, repository.GetAllEntries().Count);
+        }
     }
 }
