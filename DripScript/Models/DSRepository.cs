@@ -53,5 +53,21 @@ namespace DripScript.Models
 
             return found_date;
         }
+
+        public bool CreateEntry(DSUser dripscript_user, string content, string title)
+        {
+            JournalEntry a_entry = new JournalEntry { Title = title, Body = content, Date = DateTime.Now, Author = dripscript_user };
+            bool is_added = true;
+            try
+            {
+                JournalEntry added_entry = _context.Entries.Add(a_entry);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                is_added = false;
+            }
+            return is_added;
+        }
     }
 }
