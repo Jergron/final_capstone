@@ -44,5 +44,14 @@ namespace DripScript.Models
             return found_title;
         }
 
+        public List<JournalEntry> SearchByDate(string date)
+        {
+           
+             var query = from entry in _context.Entries select entry;
+
+            List<JournalEntry> found_date = query.Where(entry => entry.Date == DateTime.Parse(date)).ToList();
+
+            return found_date;
+        }
     }
 }
