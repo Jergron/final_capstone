@@ -22,3 +22,25 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.navbar-brand {
+    margin-left: 25% !important;
+    font-size: 25px;
+}
+
+.navbar a:hover {
+    color: indianred !important;
+}
+
+.navbar-inverse {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.profile {
+    margin-top: 10em;
+}
+
+.public_entries li{
+    color: transparent;
+}
