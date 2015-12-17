@@ -23,8 +23,12 @@ namespace DripScript
                       "~/Scripts/bootstrap.js",
                       "~/Scripts/respond.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/myjavascript").Include(
+                      "~/Scripts/custom.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
+                      "~/Content/main.css",
                       "~/Content/site.css"));
         }
     }
