@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DripScript.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -10,6 +11,22 @@ namespace DripScript.Controllers
     {
         // GET: DripScript
         public ActionResult Index()
+        {
+            return View();
+        }
+
+        [Authorize]
+        public ActionResult NewProfile()
+        {
+            List<string> list_of_items = new List<string>();
+            list_of_items.Add("My Journal");
+            list_of_items.Add("Today's News");
+            list_of_items.Add("How About That");
+            return View(list_of_items);
+        }
+
+        [Authorize]
+        public ActionResult JournalEntry()
         {
             return View();
         }
