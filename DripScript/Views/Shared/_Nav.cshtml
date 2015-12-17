@@ -6,14 +6,23 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            @Html.ActionLink("DripScript", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                <li>@Html.ActionLink("Profile", "Index", "DripScript")</li>
-                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                @if (true)
+                {
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                    <li>@Html.ActionLink("Profile", "NewProfile", "DripScript")</li>
+                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                }
+                else
+                {
+                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                }
+
+                
             </ul>
+            @Html.ActionLink("DripScript", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             @Html.Partial("_LoginPartial")
         </div>
     </div>
