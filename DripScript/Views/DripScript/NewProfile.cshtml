@@ -1,0 +1,38 @@
+﻿@model IEnumerable<string>
+@{
+    Layout = "~/Views/Shared/_DripScriptLayout.cshtml";
+}
+<div class="profile container">
+    <div class="row">
+        <div class="form col-md-4">
+            <input class="form-control" id="first" type="text" placeholder="First Name"/>
+            <br />
+            <input class="form-control" id="last" type="text" placeholder="Last Name" />
+            <br />
+            <input class="form-control" id="city" type="text"placeholder="City"/>
+            <br />
+            <input class="form-control" id="zip" type="text" placeholder="Zip" />
+        </div>
+        <div class="col-md-4">
+            <img width="325" src="https://pixabay.com/static/uploads/photo/2015/10/14/16/20/border-collie-987947_960_720.jpg"/>
+            <input type="file"/>
+            <br />
+            <h4>Public Entries</h4>
+            <table style="text-align:center">
+                <tr>          
+                    <td class="public_entries">
+                        @foreach (var item in Model)
+                        {
+                           <p><a href="/" + @item>@item</a></p>
+                        }
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="col-md-4">
+            <textarea id="about" class="form-control" placeholder="Write About Yourself"></textarea>
+            <br />
+            <textarea id="verse" class="form-control"></textarea>
+        </div>
+    </div>
+</div>
