@@ -9,6 +9,7 @@ namespace DripScript.Controllers
 {
     public class DripScriptController : Controller
     {
+        private DSContext db = new DSContext();
         // GET: DripScript
         public ActionResult Index()
         {
@@ -18,11 +19,12 @@ namespace DripScript.Controllers
         [Authorize]
         public ActionResult NewProfile()
         {
-            List<string> list_of_items = new List<string>();
-            list_of_items.Add("My Journal");
-            list_of_items.Add("Today's News");
-            list_of_items.Add("How About That");
-            return View(list_of_items);
+            
+            //List<string> list_of_items = new List<string>();
+            //list_of_items.Add("My Journal");
+            //list_of_items.Add("Today's News");
+            //list_of_items.Add("How About That");
+            return View(db.Entries.ToList());
         }
 
         [Authorize]
