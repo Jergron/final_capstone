@@ -26,11 +26,11 @@ namespace DripScript.Migrations
                         Title = c.String(),
                         Body = c.String(nullable: false),
                         Date = c.DateTime(nullable: false),
-                        Author_UserId = c.Int(),
+                        UserId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.EntryId)
-                .ForeignKey("dbo.DSUsers", t => t.Author_UserId)
-                .Index(t => t.Author_UserId);
+                .ForeignKey("dbo.DSUsers", t => t.UserId, cascadeDelete: true)
+                .Index(t => t.UserId);
             
             CreateTable(
                 "dbo.AspNetRoles",
@@ -108,14 +108,14 @@ namespace DripScript.Migrations
             DropForeignKey("dbo.AspNetUserLogins", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserClaims", "UserId", "dbo.AspNetUsers");
             DropForeignKey("dbo.AspNetUserRoles", "RoleId", "dbo.AspNetRoles");
-            DropForeignKey("dbo.JournalEntries", "Author_UserId", "dbo.DSUsers");
+            DropForeignKey("dbo.JournalEntries", "UserId", "dbo.DSUsers");
             DropIndex("dbo.AspNetUserLogins", new[] { "UserId" });
             DropIndex("dbo.AspNetUserClaims", new[] { "UserId" });
             DropIndex("dbo.AspNetUsers", "UserNameIndex");
             DropIndex("dbo.AspNetUserRoles", new[] { "RoleId" });
             DropIndex("dbo.AspNetUserRoles", new[] { "UserId" });
             DropIndex("dbo.AspNetRoles", "RoleNameIndex");
-            DropIndex("dbo.JournalEntries", new[] { "Author_UserId" });
+            DropIndex("dbo.JournalEntries", new[] { "UserId" });
             DropTable("dbo.AspNetUserLogins");
             DropTable("dbo.AspNetUserClaims");
             DropTable("dbo.AspNetUsers");

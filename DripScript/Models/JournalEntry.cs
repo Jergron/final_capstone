@@ -14,6 +14,7 @@ namespace DripScript.Models
         [Required]
         public string Body { get; set; }
         public DateTime Date { get; set; }
+        public int UserId { get; set; }
         public virtual DSUser Author { get; set; }
         public bool isPublic()
         {
