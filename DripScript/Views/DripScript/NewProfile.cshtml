@@ -1,4 +1,4 @@
-﻿@model IEnumerable<string>
+﻿@model IEnumerable<DripScript.Models.JournalEntry>
 @{
     Layout = "~/Views/Shared/_DripScriptLayout.cshtml";
 }
@@ -14,7 +14,7 @@
             <input class="form-control" id="zip" type="text" placeholder="Zip" />
         </div>
         <div class="col-md-4">
-            <img width="325" src="https://pixabay.com/static/uploads/photo/2015/10/14/16/20/border-collie-987947_960_720.jpg"/>
+            <img style="width:100%;height:100%" src="http://place-hoff.com/220/155"/>
             <input type="file"/>
             <br />
             <h4>Public Entries</h4>
@@ -23,7 +23,7 @@
                     <td class="public_entries">
                         @foreach (var item in Model)
                         {
-                           <p><a href="/" + @item>@item</a></p>
+                           <p><a href="/">@item.Title</a></p>
                         }
                     </td>
                 </tr>
