@@ -3,16 +3,26 @@
     Layout = "~/Views/Shared/_DripScriptLayout.cshtml";
 }
 
-<!DOCTYPE html>
-
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title></title>
-</head>
-<body>
-    <div>
-    
+<div class="mainJournal container">
+    <div class="row">
+        <div class="colLeft col-md-4">
+            <div id="music"></div>
+            <p>Would you like to make this journal entry public?</p>
+            <input class="checkbox" id="checkbox" type="checkbox" />
+            <img id="image" src="http://place-hoff.com/220/155"/>
+            <input id="searchPic" class="form-control" type="search" placeholder="Search Images" />
+            <button class="btn-sm btn-success">Search</button>
+        </div>
+        <div class="midEntry col-md-4">
+            <div id="journalTitle">
+                <h2>Journal Title</h2>
+            </div>
+            <p id="date">@DateTime.Now</p> 
+        </div>
+        <div class="colRight col-md-4">
+            <div id="dailyVs"></div>
+            <div id="searchVerse"></div>
+            <input id="searchBible" class="form-control" type="search" placeholder="Search Verses" />
+        </div>
     </div>
-</body>
-</html>
+</div>
