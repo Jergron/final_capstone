@@ -27,7 +27,7 @@ namespace DripScript.Controllers
             return View(db.Entries.ToList());
         }
 
-        [Authorize]
+        
         public ActionResult JournalEntry()
         {
             return View();
