@@ -9,18 +9,11 @@
         </div>
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                @if (true)
-                {
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("Profile", "NewProfile", "DripScript")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
-                }
-                else
-                {
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                }
-
-                
+               
+                <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                <li>@Html.ActionLink("Profile", "NewProfile", "DripScript")</li>
+          
             </ul>
             @Html.ActionLink("DripScript", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
             @Html.Partial("_LoginPartial")
