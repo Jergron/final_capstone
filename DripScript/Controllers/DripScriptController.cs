@@ -16,7 +16,7 @@ namespace DripScript.Controllers
             return View();
         }
 
-        [Authorize]
+
         public ActionResult NewProfile()
         {
             
