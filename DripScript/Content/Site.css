@@ -37,6 +37,11 @@ textarea {
     border-color: transparent;
 }
 
+.mce-panel {
+    border: 0;
+    background-color: white;
+}
+
 .profile {
     margin-top: 10em;
 }
