@@ -37,20 +37,14 @@ namespace DripScript.Models
         public List<JournalEntry> SearchByTitle(string title)
         {
             var query = from entry in _context.Entries select entry;
-
-            List<JournalEntry> found_title = query.Where(entry => entry.Title.Contains(title)).ToList();
-            
-
+            List<JournalEntry> found_title = query.Where(entry => entry.Title.Contains(title)).ToList();         
             return found_title;
         }
 
         public List<JournalEntry> SearchByDate(string date)
-        {
-           
+        {          
              var query = from entry in _context.Entries select entry;
-
             List<JournalEntry> found_date = query.Where(entry => entry.Date == DateTime.Parse(date)).ToList();
-
             return found_date;
         }
 
