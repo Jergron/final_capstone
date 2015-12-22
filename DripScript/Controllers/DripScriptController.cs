@@ -19,11 +19,6 @@ namespace DripScript.Controllers
 
         public ActionResult NewProfile()
         {
-            
-            //List<string> list_of_items = new List<string>();
-            //list_of_items.Add("My Journal");
-            //list_of_items.Add("Today's News");
-            //list_of_items.Add("How About That");
             return View(db.Entries.ToList());
         }
 
