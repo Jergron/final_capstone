@@ -21,7 +21,6 @@
     border: 2px solid green;
     max-width: 300px;
     height: 100%;
-    float: right;
 }
 
 .mainJournal {
@@ -33,4 +32,8 @@
 
 .midEntry{
  text-align: center;
+}
+
+#date {
+    text-align: right;
 }
