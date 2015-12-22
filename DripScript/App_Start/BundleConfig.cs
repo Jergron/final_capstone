@@ -30,6 +30,11 @@ namespace DripScript
                       "~/Content/bootstrap.css",
                       "~/Content/main.css",
                       "~/Content/site.css"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
+                      "~/Scripts/angular-aria.js",
+                      "~/Scripts/angular.js",
+                      "~/Scripts/app.js"));
         }
     }
 }
