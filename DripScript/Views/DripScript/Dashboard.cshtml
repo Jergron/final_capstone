@@ -1,0 +1,16 @@
+﻿@model IEnumerable<DripScript.Models.JournalEntry>
+@{
+    Layout = "~/Views/Shared/_DripScriptLayout.cshtml";
+}
+
+<div ng-controller="TestController">
+    <div class="row">
+        <div class="col-sm-3">
+            @foreach (var item in Model)
+            {
+                <p><a href="/">@item.Title</a></p>
+                <button ng-click="delete()">Delete Journal</button>
+            }
+        </div>
+    </div>
+</div>

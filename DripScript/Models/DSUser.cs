@@ -10,6 +10,7 @@ namespace DripScript.Models
     {
         [Key]
         public int UserId { get; set; }
+        public virtual ApplicationUser RealUser { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Description { get; set; }

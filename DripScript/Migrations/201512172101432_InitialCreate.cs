@@ -1,4 +1,4 @@
-namespace DripScript.Migrations
+    namespace DripScript.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;
