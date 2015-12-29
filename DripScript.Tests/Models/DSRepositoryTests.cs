@@ -32,10 +32,10 @@ namespace DripScript.Tests.Models
         {
             var data_source = data_store.AsQueryable();
 
-            mock_set.As<IQueryable<DSUser>>().Setup(data => data.Provider).Returns(data_source.Provider);
-            mock_set.As<IQueryable<DSUser>>().Setup(data => data.Expression).Returns(data_source.Expression);
-            mock_set.As<IQueryable<DSUser>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
-            mock_set.As<IQueryable<DSUser>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
+            mock_user_set.As<IQueryable<DSUser>>().Setup(data => data.Provider).Returns(data_source.Provider);
+            mock_user_set.As<IQueryable<DSUser>>().Setup(data => data.Expression).Returns(data_source.Expression);
+            mock_user_set.As<IQueryable<DSUser>>().Setup(data => data.ElementType).Returns(data_source.ElementType);
+            mock_user_set.As<IQueryable<DSUser>>().Setup(data => data.GetEnumerator()).Returns(data_source.GetEnumerator());
 
             mock_context.Setup(e => e.DSUsers).Returns(mock_user_set.Object);
         }
@@ -182,6 +182,27 @@ namespace DripScript.Tests.Models
             // Assert
             Assert.IsTrue(successful);
             Assert.AreEqual(1, repository.GetAllEntries().Count);
+        }
+
+        [TestMethod]
+        public void DSRepositoryEnsureICanCreateADripScriptUser()
+        {
+            // Arrange
+            List<DSUser> dripscript_user_data_source = new List<DSUser>();
+            ConnectMocksToDataStore(dripscript_user_data_source);
+
+            ApplicationUser user = new ApplicationUser { Email = "test@test.com", Id = "45"};
+
+            mock_user_set.Setup(j => j.Add(It.IsAny<DSUser>())).Callback((DSUser s) => dripscript_user_data_source.Add(s));
+
+            // Act
+            bool successful = repository.CreateDSUser(user);
+            DSUser dripscript_user = repository.GetAllUsers().Where(u => u.RealUser.Id == user.Id).SingleOrDefault();
+
+            // Assert
+            Assert.IsNotNull(dripscript_user);
+            Assert.AreEqual(user.Id, dripscript_user.RealUser.Id);
+            Assert.AreEqual(1, repository.GetAllUsers().Count);
         }
     }
 }

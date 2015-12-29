@@ -63,5 +63,39 @@ namespace DripScript.Models
             }
             return is_added;
         }
+
+        public List<JournalEntry> GetUserEntries(DSUser user)
+        {
+            if (user != null)
+            {
+                var query = from u in _context.DSUsers where u.UserId == user.UserId select u;
+                DSUser found_user = query.SingleOrDefault();
+                if (found_user == null)
+                {
+                    return new List<JournalEntry>();
+                }
+                return found_user.Entries;
+            }
+            else
+            {
+                return new List<JournalEntry>();
+            }
+        }
+
+        public bool CreateDSUser(ApplicationUser app_user)
+        {
+            DSUser new_user = new DSUser { RealUser = app_user };
+            bool is_added = true;
+            try
+            {
+                DSUser added_user = _context.DSUsers.Add(new_user);
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                is_added = false;
+            }
+            return is_added;
+        }
     }
 }
