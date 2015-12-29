@@ -4,16 +4,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace DripScript.Controllers
 {
     public class DripScriptController : Controller
     {
+        public DSRepository Repo { get; set; }
+
+        public DripScriptController() : base()
+        {
+            Repo = new DSRepository();
+        }
+
         private DSContext db = new DSContext();
         // GET: DripScript
         public ActionResult Index()
         {
-            return View();
+            List<JournalEntry> my_entries = Repo.GetAllEntries();
+            return View(my_entries);
+        }
+
+        public ActionResult Dashboard()
+        {
+            string user_id = User.Identity.GetUserId();
+            DSUser me = Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).Single();
+
+            List<JournalEntry> list_of_entries = Repo.GetUserEntries(me);
+            return View(list_of_entries);
         }
 
 
