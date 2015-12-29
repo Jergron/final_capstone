@@ -2,40 +2,33 @@
 @{
     Layout = "~/Views/Shared/_DripScriptLayout.cshtml";
 }
-<div ng-controller="Controller">
-    <p>{{test}}</p>
-    <button ng-click="hello()">Click me!</button>
+<div ng-controller="TestController">
     <div class="profile container">
         <div class="row">
             <div class="form col-md-4">
-                <input class="form-control" id="first" type="text" placeholder="First Name"/>
+                <input class="form-control" id="first" type="text" placeholder="First Name" />
                 <br />
                 <input class="form-control" id="last" type="text" placeholder="Last Name" />
                 <br />
-                <input class="form-control" id="city" type="text"placeholder="City"/>
+                <input class="form-control" id="city" type="text" placeholder="City" />
                 <br />
                 <input class="form-control" id="zip" type="text" placeholder="Zip" />
             </div>
             <div class="col-md-4">
-                <img style="width:100%;height:100%" src="http://place-hoff.com/220/155"/>
-                <input type="file"/>
+                <img style="width:100%;height:100%" src="http://place-hoff.com/220/155" />
+                <input type="file" />
                 <br />
-                <h4>Public Entries</h4>
+                <h4>My Journal Entries</h4>
                 <table style="text-align:center">
-                    <tr>          
+                    <tr>
                         <td class="public_entries">
-                            @if (Model.Count() != 0)
+                            @foreach (var item in Model)
                             {
-                                foreach (var item in Model)
-                                {
-                                   <p><a href="/">@item.Title</a></p>
-                                }
-                            } else  
-                            {
-                                <p>Help Me</p>
+                                <p><a href="/">@item.Title</a></p>
+                                <button ng-click="delete()">Delete Journal</button>
                             }
                         </td>
-                    </tr>
+                    </tr>         
                 </table>
             </div>
             <div class="col-md-4">
