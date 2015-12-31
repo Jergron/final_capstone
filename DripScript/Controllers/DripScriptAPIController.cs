@@ -13,10 +13,7 @@ namespace DripScript.Controllers
     {
         public DSRepository Repo { get; set; }
 
-        public DripScriptAPIController() : base()
-        {
-            Repo = new DSRepository();
-        }
+      
 
         // GET: api/DripScriptAPI
         public string Get()
@@ -36,9 +33,6 @@ namespace DripScript.Controllers
         }
 
         // POST: api/DripScriptAPI
-        public void Post([FromBody]string value)
-        {
-        }
 
         public void Post(JournalEntry new_entry)
         {
