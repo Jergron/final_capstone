@@ -2,11 +2,10 @@
 @{
     Layout = "~/Views/Shared/_DripScriptLayout.cshtml";
 }
-<p id="date">@DateTime.Now</p>
 <div id="journalTitle">
     <h2>Journal Title</h2>
 </div>
-<div class="mainJournal container">
+<div ng-controller="TestController" class="mainJournal container">
     <div class="row">
         <div class="colLeft col-md-4">
             <div id="music"></div>
@@ -18,8 +17,12 @@
         </div>
         <div class="midEntry col-md-4">
             <div method="post">
-                <textarea id="mytextarea">Hello, World!</textarea>
+                <p id="formDate">@DateTime.Now</p>
+                <textarea ng-model="body"></textarea>
             </div>
+            <p>{{word}}</p>
+            <button ng-click="test()">Click Me</button>
+            <button ng-click="createEntry()">Save Journal Entry</button>
         </div>
         <div class="colRight col-md-4">
             <div id="dailyVs"></div>

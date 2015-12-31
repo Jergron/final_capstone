@@ -38,7 +38,8 @@ namespace DripScript.Controllers
 
         public ActionResult NewProfile()
         {
-            return View(db.Entries.ToList());
+            DSUser user = new DSUser();
+            return View(db.Entries.Where(e => e.UserId == user.UserId).ToList());
         }
 
         

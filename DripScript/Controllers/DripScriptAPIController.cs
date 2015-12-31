@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DripScript.Models;
+using Microsoft.AspNet.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -9,11 +11,23 @@ namespace DripScript.Controllers
 {
     public class DripScriptAPIController : ApiController
     {
-        // GET: api/DripScriptAPI
-        public IEnumerable<string> Get()
+        public DSRepository Repo { get; set; }
+
+        public DripScriptAPIController() : base()
         {
-            return new string[] { "value1", "value2" };
+            Repo = new DSRepository();
         }
+
+        // GET: api/DripScriptAPI
+        public string Get()
+        {
+            return "Hello World!";
+        }
+
+        //public IEnumerable<string> Get()
+        //{
+        //    return new string[] { "value1", "value2" };
+        //}
 
         // GET: api/DripScriptAPI/5
         public string Get(int id)
@@ -24,6 +38,17 @@ namespace DripScript.Controllers
         // POST: api/DripScriptAPI
         public void Post([FromBody]string value)
         {
+        }
+
+        public void Post(JournalEntry new_entry)
+        {
+            string user_id = User.Identity.GetUserId();
+            DSUser me = Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+
+            if (me != null)
+            {
+                Repo.CreateEntry(me, new_entry.Body, new_entry.Title);
+            }
         }
 
         // PUT: api/DripScriptAPI/5
