@@ -7,18 +7,21 @@ app.controller("TestController", ["$scope", "$http", function ($scope, $http) {
     $scope.test = function () {
         $http.get("/api/DripScriptAPI").success(function (data) {
             $scope.word = data;
+            console.log("data", data);
             alert("Success!");
         }).error(function () {
-            console.log(error.error);
+            console.log("Nope, try again");
         })
     }
+
     $scope.createEntry = function () {
         console.log("I Work!");
         $form = $("#myform").first();
 
         $entry = {
             "Content": $scope.body,
-            "Date": $("#formDate").val()
+            "Date": $scope.date,
+            "Title": $scope.title
         }
 
         console.log("Entry", $entry);
