@@ -13,7 +13,11 @@ namespace DripScript.Controllers
     {
         public DSRepository Repo { get; set; }
 
-      
+        public DripScriptAPIController() : base()
+        {
+            Repo = new DSRepository();
+        }
+
 
         // GET: api/DripScriptAPI
         public string Get()
@@ -37,12 +41,13 @@ namespace DripScript.Controllers
         public void Post(JournalEntry new_entry)
         {
             string user_id = User.Identity.GetUserId();
-            DSUser me = Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).SingleOrDefault();
+            ApplicationUser new_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
+            DSUser me = Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).First();
 
             if (me != null)
             {
                 Repo.CreateEntry(me, new_entry.Body, new_entry.Title);
-            }
+            } 
         }
 
         // PUT: api/DripScriptAPI/5
@@ -53,6 +58,7 @@ namespace DripScript.Controllers
         // DELETE: api/DripScriptAPI/5
         public void Delete(int id)
         {
+           
         }
     }
 }

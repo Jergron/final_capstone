@@ -2,6 +2,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Data;
+using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
@@ -26,23 +29,33 @@ namespace DripScript.Controllers
             return View(my_entries);
         }
 
+        [Authorize]
         public ActionResult Dashboard()
         {
             string user_id = User.Identity.GetUserId();
-            DSUser me = Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).Single();
+            ApplicationUser new_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
+            DSUser me = null;
+            if (Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).Count() < 1)
+            {
+                bool successful = Repo.CreateDSUser(new_user);
+            }
+            else
+            {
+                me = Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).First();
+            }
 
             List<JournalEntry> list_of_entries = Repo.GetUserEntries(me);
             return View(list_of_entries);
         }
 
-
+        [Authorize]
         public ActionResult NewProfile()
         {
             DSUser user = new DSUser();
             return View(db.Entries.Where(e => e.UserId == user.UserId).ToList());
         }
 
-        
+        [Authorize]
         public ActionResult JournalEntry()
         {
             return View();

@@ -14,13 +14,18 @@ app.controller("TestController", ["$scope", "$http", function ($scope, $http) {
         })
     }
 
+    $scope.delete = function () {
+        $http.delete("/api/DripScriptAPI/5")
+            .success(function (data) { alert("Journal Entry Deleted"); })
+            .error(function () { console.log(error); });
+    }
+
     $scope.createEntry = function () {
         console.log("I Work!");
         $form = $("#myform").first();
 
         $entry = {
-            "Content": $scope.body,
-            "Date": $scope.date,
+            "Body": $scope.body,
             "Title": $scope.title
         }
 
@@ -37,10 +42,8 @@ app.controller("TestController", ["$scope", "$http", function ($scope, $http) {
 
         $http.post("/api/DripScriptAPI", $entry, $config_obj)
             .success(function (data) {
-                console.log("data", data);
-                alert("Added journal entry Yay!");
-            })
-            .error(function (error) { console.log(error.error) });
+                console.log("data -->", data);
+            }).error(function (error) { console.log(error.error) });
     }
   
 }]);

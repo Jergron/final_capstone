@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Web;
+using Microsoft.AspNet.Identity;
 
 namespace DripScript.Models
 {
@@ -69,12 +70,21 @@ namespace DripScript.Models
             if (user != null)
             {
                 var query = from u in _context.DSUsers where u.UserId == user.UserId select u;
+
+                var entry_query = from e in _context.Entries where e.Author.UserId == user.UserId select e;
+
+                List<JournalEntry> my_entries = entry_query.ToList();
+
                 DSUser found_user = query.SingleOrDefault();
                 if (found_user == null)
                 {
                     return new List<JournalEntry>();
                 }
-                return found_user.Entries;
+                if (my_entries == null)
+                {
+                    return new List<JournalEntry>();
+                }
+                return my_entries;
             }
             else
             {
