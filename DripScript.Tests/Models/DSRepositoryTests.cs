@@ -204,5 +204,27 @@ namespace DripScript.Tests.Models
             Assert.AreEqual(user.Id, dripscript_user.RealUser.Id);
             Assert.AreEqual(1, repository.GetAllUsers().Count);
         }
+
+        [TestMethod]
+        public void DSRepositoryEnsureICanDeleteJournalEntry()
+        {
+            // Arrange
+            var entries = new List<JournalEntry>
+            {
+                new JournalEntry {EntryId = 1, Title = "My Journal", Date = DateTime.Now, Body = "Hello, I love to devolope stuff."},
+                new JournalEntry {EntryId = 2, Title = "My Second Journal", Date = DateTime.Now, Body = "I have this funny story to talk about."}
+
+            };
+
+            ConnectMocksToDataStore(entries);
+            mock_set.Setup(e => e.Remove(It.IsAny<JournalEntry>())).Callback((JournalEntry s) => entries.Remove(s));
+            // Act
+            var my_entry = repository.GetAllEntries().Where(e => e.EntryId == 1).First();
+            bool successful = repository.RemoveEntry(my_entry.EntryId);
+            // Assert
+            Assert.IsTrue(successful);
+            Assert.AreEqual(1, my_entry.EntryId);
+            Assert.AreEqual(1, repository.GetAllEntries().Count);
+        }
     }
 }
