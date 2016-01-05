@@ -14,9 +14,9 @@ app.controller("TestController", ["$scope", "$http", function ($scope, $http) {
         })
     }
 
-    $scope.delete = function () {
-        $http.delete("/api/DripScriptAPI/5")
-            .success(function (data) { alert("Journal Entry Deleted"); })
+    $scope.delete = function (id) {
+        $http.delete("/api/DripScriptAPI/" + id)
+            .success(function (data) { console.log("Journal Entry Deleted"); })
             .error(function () { console.log(error); });
     }
 

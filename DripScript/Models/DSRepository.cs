@@ -107,5 +107,22 @@ namespace DripScript.Models
             }
             return is_added;
         }
+
+        public bool RemoveEntry(int id )
+        {
+            JournalEntry a_entry = Context.Entries.Where(e => e.EntryId == id).First();
+
+            bool is_deleted = true;
+            try
+            {
+                JournalEntry deleted_entry = _context.Entries.Remove(a_entry);
+                _context.SaveChanges();
+            } 
+            catch (Exception)
+            {
+                is_deleted = false;
+            }
+            return is_deleted;
+        }
     }
 }

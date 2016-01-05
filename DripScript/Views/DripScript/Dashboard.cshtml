@@ -9,7 +9,7 @@
             @foreach (var item in Model)
             {
                 <p><a href="/">@item.Title</a></p>
-                <button ng-click="delete()">Delete Journal</button>
+                <button ng-click="delete(@item.EntryId)">Delete Journal</button>
             }
         </div>
     </div>
