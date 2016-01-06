@@ -226,5 +226,30 @@ namespace DripScript.Tests.Models
             Assert.AreEqual(1, my_entry.EntryId);
             Assert.AreEqual(1, repository.GetAllEntries().Count);
         }
+
+        [TestMethod]
+        public void DSRepositoryEnsureICanUpdateUser()
+        {
+            // Arrange
+            var users = new List<DSUser>
+            {
+                new DSUser {UserId = 1, FirstName = null, LastName = null, Description = null },
+                new DSUser {UserId = 2, FirstName = "Jim", LastName = "Car", Description = "I love cake" }
+            };
+            ConnectMocksToDataStore(users);
+
+            var user = repository.GetAllUsers().Where(u => u.UserId == 1).First();
+
+            mock_user_set.Setup(j => j.Add(It.IsAny<DSUser>())).Callback((DSUser s) => users.Add(s));
+
+            // Act
+            DSUser update = new DSUser { FirstName = "John", LastName = "Cart", Description = "I hate cake" };
+            bool successful = repository.UpdateUser(user.UserId, update);
+
+            // Assert
+            Assert.IsTrue(successful);
+            Assert.AreEqual("John", user.FirstName);
+            Assert.AreEqual(2, repository.GetAllUsers().Count);
+        }
     }
 }
