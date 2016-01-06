@@ -1,6 +1,6 @@
 ﻿var app = angular.module("drip", []);
 
-app.controller("TestController", ["$scope", "$http", function ($scope, $http) {
+app.controller("TestController", ["$scope", "$http", "$window", function ($scope, $http, $window) {
 
     $scope.word = "What?";
 
@@ -16,7 +16,22 @@ app.controller("TestController", ["$scope", "$http", function ($scope, $http) {
 
     $scope.delete = function (id) {
         $http.delete("/api/DripScriptAPI/" + id)
-            .success(function (data) { console.log("Journal Entry Deleted"); })
+            .success(function (data) { console.log("Journal Entry Deleted"); $window.location.reload(); })
+            .error(function () { console.log(error); });
+    }
+
+    $scope.update = function () {
+        $profile = {
+            "FirstName": $scope.first,
+            "LastName": $scope.last,
+            "Description": $scope.about
+        }
+
+        $http.put("/api/DripScriptAPI/5", $profile)
+            .success(function (data) {
+                $window.location.reload();
+                console.log("Profile Updated!");
+            })
             .error(function () { console.log(error); });
     }
 
@@ -43,6 +58,7 @@ app.controller("TestController", ["$scope", "$http", function ($scope, $http) {
         $http.post("/api/DripScriptAPI", $entry, $config_obj)
             .success(function (data) {
                 console.log("data -->", data);
+                $window.location.reload();
             }).error(function (error) { console.log(error.error) });
     }
   

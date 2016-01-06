@@ -1,14 +1,9 @@
 ﻿using DripScript.Models;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Data;
-using System.Data.Entity;
-using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
-using Microsoft.AspNet.Identity.Owin;
 
 namespace DripScript.Controllers
 {
@@ -51,8 +46,8 @@ namespace DripScript.Controllers
         [Authorize]
         public ActionResult NewProfile()
         {
-            DSUser user = new DSUser();
-            return View(db.Entries.Where(e => e.UserId == user.UserId).ToList());
+            string user_id = User.Identity.GetUserId();
+            return View(db.DSUsers);
         }
 
         [Authorize]

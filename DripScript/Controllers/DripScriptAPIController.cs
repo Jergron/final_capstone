@@ -1,11 +1,7 @@
 ﻿using DripScript.Models;
 using Microsoft.AspNet.Identity;
-using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Data;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 
 namespace DripScript.Controllers
@@ -52,8 +48,15 @@ namespace DripScript.Controllers
         }
 
         // PUT: api/DripScriptAPI/5
-        public void Put(int id, [FromBody]string value)
+        public void Put(DSUser update)
         {
+            string user_id = User.Identity.GetUserId();
+            DSUser me = Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).First();
+
+            if (me != null)
+            {
+                Repo.UpdateUser(me.UserId, update);  
+            }
         }
 
         // DELETE: api/DripScriptAPI/5

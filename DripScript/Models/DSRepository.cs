@@ -108,7 +108,7 @@ namespace DripScript.Models
             return is_added;
         }
 
-        public bool RemoveEntry(int id )
+        public bool RemoveEntry(int id)
         {
             JournalEntry a_entry = Context.Entries.Where(e => e.EntryId == id).First();
 
@@ -123,6 +123,27 @@ namespace DripScript.Models
                 is_deleted = false;
             }
             return is_deleted;
+        }
+
+        public bool UpdateUser(int id, DSUser update)
+        {
+            var query = from u in _context.DSUsers where u.UserId == id select u;
+            foreach (DSUser u in query)
+            {
+                u.Description = update.Description;
+                u.FirstName = update.FirstName;
+                u.LastName = update.LastName;
+            }
+            bool is_updated = true;
+            try
+            {
+                _context.SaveChanges();  
+            }
+            catch (Exception)
+            {
+                is_updated = false;
+            }
+            return is_updated;
         }
     }
 }
