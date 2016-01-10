@@ -3,6 +3,9 @@ using Microsoft.AspNet.Identity;
 using System.Linq;
 using System.Data;
 using System.Web.Http;
+using System;
+using System.Net;
+using System.IO;
 
 namespace DripScript.Controllers
 {
@@ -17,10 +20,10 @@ namespace DripScript.Controllers
 
 
         // GET: api/DripScriptAPI
-        public string Get()
-        {
-            return "Hello World!";
-        }
+        //public string Get()
+        //{
+        //    return "value";
+        //}
 
         //public IEnumerable<string> Get()
         //{
@@ -28,9 +31,26 @@ namespace DripScript.Controllers
         //}
 
         // GET: api/DripScriptAPI/5
-        public string Get(int id)
+        public string Get()
         {
-            return "value";
+            string value = "john 3:16";
+            string html = string.Empty;
+            string key = "";
+            var uri = new Uri("https://bibles.org/v2/search.js?query="+ value +"&version=eng-KJVA");
+            var cache = new CredentialCache();
+            cache.Add(uri, "Basic", new NetworkCredential(key, ""));
+            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+            request.Credentials = cache;
+            request.AutomaticDecompression = DecompressionMethods.GZip;
+
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+
+            using (Stream stream = response.GetResponseStream())
+            using (StreamReader reader = new StreamReader(stream))
+            {
+                html = reader.ReadToEnd();
+            }
+            return html;
         }
 
         // POST: api/DripScriptAPI

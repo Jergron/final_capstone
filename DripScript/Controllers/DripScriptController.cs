@@ -4,6 +4,10 @@ using System.Linq;
 using System.Data;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using System.Web.Http.Cors;
+using System;
+using System.Net;
+using System.IO;
 
 namespace DripScript.Controllers
 {
