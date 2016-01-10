@@ -6,13 +6,6 @@
    border: 2px solid red;
 }
 
-.colLeft {
-    border: 2px solid red;
-    max-width: 300px;
-    height: 100%;
-    text-align: center;
-}
-
 .mce-panel {
     border: 0 !important;
     background-color: white !important;
@@ -21,11 +14,29 @@
 #checkbox {
     margin-left: 9em;
 }
-.colRight {
-    border: 2px solid green;
-    max-width: 300px;
-    height: 100%;
-    float: right;
+
+
+
+#date {
+    text-align: right;
+}
+
+/*
+    JOURNAL ENTRY
+*/
+
+#formDate {
+    text-align: right;
+}
+
+#entryTitle{
+    font-size: x-large;
+    border: none;
+    outline: none;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
 }
 
 .mainJournal {
@@ -35,6 +46,67 @@
     margin-top: 50px;
 }
 
-#date {
+#journal {
+    border: none;
+    overflow: visible;
+    resize: none;
+    outline: none;
+    width: 300px;
+    min-height: 600px;
+
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+#search{
+    float: right;
+}
+.colRight {
+    height: 100%;
     text-align: right;
+}
+
+.colLeft {
+    height: 100%;
+}
+
+/*
+    DASHBOARD
+*/
+.entries {
+    margin-top: 10em;
+    height: 75px;
+}
+
+.journalTitle {
+    margin-top: 5px;
+    text-align: center;
+    border: 2px solid black;
+    border-radius: 5px;
+    background-color: gold;
+    height: 55px;
+}
+.journalTitle p{
+    margin-top: 12px;
+    margin-bottom: -10px;
+    color: black;
+}
+
+.journalTitle p:hover{
+    color: grey;
+}
+
+.journalTitle a{
+    text-decoration: none;
+}
+.delete {
+    float: right;
+    color: black;
+}
+
+.delete:hover{
+    color: red;
+    cursor: pointer;
+    font-size: 104%;
 }

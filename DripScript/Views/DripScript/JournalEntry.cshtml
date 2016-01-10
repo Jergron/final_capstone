@@ -3,32 +3,30 @@
     Layout = "~/Views/Shared/_DripScriptLayout.cshtml";
 }
 <div ng-controller="TestController" class="mainJournal container">
-    <div id="journalTitle">
-        <h2>{{title}}</h2>
-        <p ng-model="date" id="formDate">@DateTime.Now</p>
-    </div>
     <div class="row">
         <div class="colLeft col-md-4">
-            <div id="music"></div>
-            <p>Would you like to make this journal entry public?</p>
-            <input class="checkbox" id="checkbox" type="checkbox" />
+            @*<div id="music"></div>
             <img id="image" src="http://place-hoff.com/220/155"/>
             <input id="searchPic" class="form-control" type="search" placeholder="Search Images" />
-            <button class="btn-sm btn-success">Search</button>
+            <button class="btn-sm btn-success">Search</button>*@
         </div>
         <div class="midEntry col-md-4">
-            <div method="post">
-                <input ng-model="title" placeholder="Journal Title"/>
-                <textarea ng-model="body"></textarea>
+            <div class="row">
+                <div class="col-sm-offset-6">
+                    <h4 ng-model="date" id="formDate">@DateTime.Now</h4>
+                </div>
+                <div class="col-sm-6">
+                    <input id="entryTitle" ng-model="title" placeholder="Journal Title"/>
+                </div> 
             </div>
-            <p>{{word}}</p>
-            <button ng-click="test()">Click Me</button>
-            <button ng-click="createEntry()">Save Journal Entry</button>
+            <textarea id="journal" ng-model="body"></textarea>       
         </div>
         <div class="colRight col-md-4">
             <div id="dailyVs"></div>
-            <div id="searchVerse"></div>
-            <input id="searchBible" class="form-control" type="search" placeholder="Search Verses" />
+            <input id="search" ng-model="searchBible" class="form-control" type="search" placeholder="Search Verses" />
+            <br />
+            <button class="btn-group-sm btn-success" ng-click="createEntry()">Save Journal Entry</button>
+            <button ng-click="verseSearch()">Search</button>
         </div>
     </div>
 </div>

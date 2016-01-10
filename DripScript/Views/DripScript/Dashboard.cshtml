@@ -1,16 +1,25 @@
 ﻿@model IEnumerable<DripScript.Models.JournalEntry>
 @{
     Layout = "~/Views/Shared/_DripScriptLayout.cshtml";
+var date = from u in Model select u.Date;
 }
 
 <div ng-controller="TestController">
-    <div class="row">
-        <div class="col-sm-3">
+    <div class="container">
+        <div class="entries row">
             @foreach (var item in Model)
             {
-                <p><a href="/">@item.Title</a></p>
-                <button ng-click="delete(@item.EntryId)">Delete Journal</button>
+                <a href="/">                   
+                    <div class="journalTitle col-md-3">
+                        <p>@item.Title</p>
+                        <p></p>                  
+                        <a class="delete" ng-click="delete(@item.EntryId)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                    </div>
+                </a>
             }
         </div>
     </div>
 </div>
+    

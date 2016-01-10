@@ -24,7 +24,7 @@ textarea {
 }
 
 .navbar-brand {
-    margin-left: 25% !important;
+    margin-left: 16% !important;
     font-size: 25px;
 }
 
@@ -33,7 +33,7 @@ textarea {
 }
 
 .navbar-inverse {
-    background-color: transparent;
+    background-color: white;
     border-color: transparent;
 }
 
@@ -48,4 +48,10 @@ textarea {
 
 .public_entries li{
     color: transparent;
+}
+
+@media(max-width: 991px){
+    .navbar-brand {
+        margin-left: 1% !important;
+    }
 }
