@@ -1,0 +1,30 @@
+﻿@model IEnumerable<DripScript.Models.JournalEntry>
+@{
+    Layout = "~/Views/Shared/_DripScriptLayout.cshtml";
+}
+<div class="row">
+    <div class="col-md-5"></div>
+    <table class="readingJournal col-md-6">
+        @foreach (var item in Model)
+        {
+           <tr>
+                <td>
+                   <h1 id="readTitle">@item.Title</h1>
+                </td>
+                <td class="time">
+                    <p>You wrote <strong>@item.Title</strong> on:</p>
+                 <h4>@item.Date</h4> 
+                </td>
+
+           </tr>
+           <tr>
+                <td class="readBody">
+                    <p>@item.Body</p>
+                </td>
+           </tr>
+        }
+   
+    </table>
+    <div class="col-md-1"></div>
+</div>
+

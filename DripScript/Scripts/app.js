@@ -60,5 +60,12 @@ app.controller("TestController", ["$scope", "$http", "$window", function ($scope
                 console.log("data", data);
             }); 
     }
+
+    $scope.myJournal = function (id) {
+        $http.get("/DripScript/MyJournal/" + id)
+            .success(function (data) {
+                console.log("data", data);
+            });
+    }
   
 }]);

@@ -24,9 +24,32 @@ namespace DripScript.Controllers
         // GET: DripScript
         public ActionResult Index()
         {
+            string user_id = User.Identity.GetUserId();
+            ApplicationUser new_user = Repo.Context.Users.FirstOrDefault(u => u.Id == user_id);
+            DSUser me = null;
+            if (Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).Count() < 1)
+            {
+                bool successful = Repo.CreateDSUser(new_user);
+            }
+            else
+            {
+                me = Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).First();
+            }
             List<JournalEntry> my_entries = Repo.GetAllEntries();
             return View(my_entries);
         }
+
+        public ActionResult MyJournal(int id) {
+
+            string user_id = User.Identity.GetUserId();
+            DSUser me = Repo.GetAllUsers().Where(u => u.RealUser.Id == user_id).First();
+
+            List<JournalEntry> list_of_entries = Repo.GetUserEntries(me);
+            var entry = list_of_entries.Where(e => e.EntryId == id).ToList();
+
+            return View(entry);
+        }
+
 
         [Authorize]
         public ActionResult Dashboard()
