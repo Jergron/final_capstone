@@ -1,7 +1,7 @@
 ﻿@model IEnumerable<DripScript.Models.JournalEntry>
 @{
     Layout = "~/Views/Shared/_DripScriptLayout.cshtml";
-var date = from u in Model select u.Date;
+    var date = from u in Model select u.Date;
 }
 
 <div ng-controller="TestController">
@@ -9,15 +9,14 @@ var date = from u in Model select u.Date;
         <div class="entries row">
             @foreach (var item in Model)
             {
-                <a href="/">                   
+                                  
                     <div class="journalTitle col-md-3">
-                        <p>@item.Title</p>
-                        <p></p>                  
+                        <a href="/DripScript/MyJournal/@item.EntryId" ng-click="myJournal(@item.EntryId)"><p>@item.Title</p></a>                 
                         <a class="delete" ng-click="delete(@item.EntryId)">
                             <span class="glyphicon glyphicon-trash"></span>
                         </a>
                     </div>
-                </a>
+              
             }
         </div>
     </div>

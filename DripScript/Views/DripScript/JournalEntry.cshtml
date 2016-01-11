@@ -6,7 +6,7 @@
     <div class="row">
         <div class="colLeft col-md-4">
             @*<div id="music"></div>
-            <img id="image" src="http://place-hoff.com/220/155"/>
+            <img id="image" src="http://jkgrondahl.com/images/Cohort_10_0113_T.jpg"/>
             <input id="searchPic" class="form-control" type="search" placeholder="Search Images" />
             <button class="btn-sm btn-success">Search</button>*@
         </div>
@@ -19,13 +19,13 @@
                     <input id="entryTitle" ng-model="title" placeholder="Journal Title"/>
                 </div> 
             </div>
-            <textarea id="journal" ng-model="body"></textarea>       
+            <textarea id="journal" ng-model="body" autofocus></textarea>       
         </div>
         <div class="colRight col-md-4">
             <div id="dailyVs"></div>
             <input id="search" ng-model="searchBible" class="form-control" type="search" placeholder="Search Verses" />
             <br />
-            <button class="btn-group-sm btn-success" ng-click="createEntry()">Save Journal Entry</button>
+            <button class="btn-success" ng-click="createEntry()">Save Journal Entry</button>
             <button ng-click="verseSearch()">Search</button>
         </div>
     </div>

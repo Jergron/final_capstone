@@ -1,4 +1,5 @@
 ﻿@model IEnumerable<DripScript.Models.DSUser>
+@using Microsoft.AspNet.Identity;
 @{
     Layout = "~/Views/Shared/_DripScriptLayout.cshtml";
 }
@@ -11,9 +12,9 @@
                 <br />
                 <input ng-model="last" class="form-control" id="last" type="text" placeholder="Last Name" />
             </div>
-            <div class="col-md-4">
-                <img style="width:100%;height:100%" src="http://place-hoff.com/220/155" />
-                <input type="file" />
+            <div class="proPic col-md-4">
+                <img style="width:75%; height:75%;" src="http://2ndandcharles.com/img/sequence/scene-two/open-book.png" />
+                <br />
                 <br />
                 <button ng-click="update()">Update Profile</button>                                                
             </div>
