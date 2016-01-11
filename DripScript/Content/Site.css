@@ -25,11 +25,12 @@ textarea {
 
 .navbar-brand {
     margin-left: 16% !important;
-    font-size: 25px;
+    font-size: 48px;
+    font-family: 'Fredericka the Great', cursive;
 }
 
 .navbar a:hover {
-    color: indianred !important;
+    color: black !important;
 }
 
 .navbar-inverse {
@@ -50,8 +51,61 @@ textarea {
     color: transparent;
 }
 
+@media(max-width: 1032px){
+    .navbar-brand {
+        margin-left: 10% !important;
+        padding-right: 0 !important;
+    }
+      .greeting a{
+        padding-left: 0 !important;
+    }
+}
+
 @media(max-width: 991px){
     .navbar-brand {
-        margin-left: 1% !important;
+        padding-right: 0 !important;
+       font-size: 35px;
+        margin-left: 0 !important;
+    }
+    .greeting a{
+        padding-left: 0 !important;
+    }
+    .readingJournal {
+        margin-top: 15%;
+        margin-left: 35%;
+    }
+    .time {
+        float: left;
+        margin-left: 2em;
+    }
+}
+
+@media(max-width: 630px){
+    .navbar-brand {
+       
+    }
+    .readingJournal {
+        margin-left: 25%;
+    }
+    .readBody{
+        margin: 0;
+    }
+    .time p{
+        display: none;
+    }
+}
+
+@media(max-width: 368px){
+    .navbar-brand {
+        display: none;
+    }
+    .readingJournal {
+        margin-left: 25%;
+    }
+    .readBody{
+        margin: 0;
+    }
+    .time {
+        display: none; 
     }
 }

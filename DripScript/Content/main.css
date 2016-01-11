@@ -2,8 +2,20 @@
     background-color: white;
 }
 
+#date {
+    text-align: right;
+}
+
+/*
+    PROFILE
+*/
+
+.proPic {
+    text-align: center;
+}
+
 .profile {
-   border: 2px solid red;
+   
 }
 
 .mce-panel {
@@ -17,9 +29,6 @@
 
 
 
-#date {
-    text-align: right;
-}
 
 /*
     JOURNAL ENTRY
@@ -31,6 +40,7 @@
 
 #entryTitle{
     font-size: x-large;
+    font-family: 'Fjalla One', sans-serif;
     border: none;
     outline: none;
 
@@ -40,7 +50,6 @@
 }
 
 .mainJournal {
-    border: 2px dotted blue;
     max-height: 100%;
     max-width: 100%;
     margin-top: 50px;
@@ -53,6 +62,7 @@
     outline: none;
     width: 300px;
     min-height: 600px;
+    margin-left: -8em;
 
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
@@ -77,6 +87,7 @@
 .entries {
     margin-top: 10em;
     height: 75px;
+    transition: margin-left ease-in 4s;
 }
 
 .journalTitle {
@@ -91,10 +102,13 @@
     margin-top: 12px;
     margin-bottom: -10px;
     color: black;
+    
 }
 
 .journalTitle p:hover{
-    color: grey;
+    color: ivory;
+    font-weight: bold;
+    letter-spacing: .5px;
 }
 
 .journalTitle a{
@@ -103,10 +117,35 @@
 .delete {
     float: right;
     color: black;
+    -webkit-transition: width 2s, height 2s, background-color 2s, -webkit-transform 2s;
+    transition: width 2s, height 2s, background-color 2s, transform 2s;
 }
 
 .delete:hover{
     color: red;
     cursor: pointer;
     font-size: 104%;
+     -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+/*
+    MY JOURNAL
+*/
+
+.readingJournal {
+    margin-top: 5em;
+}
+#readTitle {
+    font-family: 'Fjalla One', sans-serif;
+}
+.time {
+    margin-left: 5em;
+}
+
+.readBody {
+    float: left;
+    margin-top: 2em;
+    margin-left: -8em;
+    font-size: 16px;
 }
