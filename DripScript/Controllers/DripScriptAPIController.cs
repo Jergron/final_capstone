@@ -6,6 +6,7 @@ using System.Web.Http;
 using System;
 using System.Net;
 using System.IO;
+using Newtonsoft.Json;
 
 namespace DripScript.Controllers
 {
@@ -31,26 +32,33 @@ namespace DripScript.Controllers
         //}
 
         // GET: api/DripScriptAPI/5
-        public string Get()
+        [HttpPost]
+        [Route("api/DripScriptAPI/search")]
+        public string Get(QueryViewModel query)
         {
-            string value = "john 3:16";
             string html = string.Empty;
             string key = "";
-            var uri = new Uri("https://bibles.org/v2/search.js?query="+ value +"&version=eng-KJVA");
-            var cache = new CredentialCache();
-            cache.Add(uri, "Basic", new NetworkCredential(key, ""));
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
-            request.Credentials = cache;
-            request.AutomaticDecompression = DecompressionMethods.GZip;
-
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
-
-            using (Stream stream = response.GetResponseStream())
-            using (StreamReader reader = new StreamReader(stream))
+            if (query != null)
             {
-                html = reader.ReadToEnd();
+                var uri = new Uri("https://bibles.org/v2/search.js?query="+ query.Book +" " + query.Chapter + ":" + query.Verse + "&version=eng-KJVA");
+                var cache = new CredentialCache();
+                cache.Add(uri, "Basic", new NetworkCredential(key, ""));
+                HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
+                request.Credentials = cache;
+                request.AutomaticDecompression = DecompressionMethods.GZip;
+
+                using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+
+                using (Stream stream = response.GetResponseStream())
+                using (StreamReader reader = new StreamReader(stream))
+                {
+                    html = reader.ReadToEnd();
+                }
+                return html;
+            } else
+            {
+                return "Type in something";
             }
-            return html;
         }
 
         // POST: api/DripScriptAPI

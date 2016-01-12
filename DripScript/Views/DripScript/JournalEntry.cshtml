@@ -5,6 +5,7 @@
 <div ng-controller="TestController" class="mainJournal container">
     <div class="row">
         <div class="colLeft col-md-4">
+            <button class="btn-sm btn-success" ng-click="createEntry()">Save Journal Entry</button>
             @*<div id="music"></div>
             <img id="image" src="http://jkgrondahl.com/images/Cohort_10_0113_T.jpg"/>
             <input id="searchPic" class="form-control" type="search" placeholder="Search Images" />
@@ -13,7 +14,7 @@
         <div class="midEntry col-md-4">
             <div class="row">
                 <div class="col-sm-offset-6">
-                    <h4 ng-model="date" id="formDate">@DateTime.Now</h4>
+                    <h5>@DateTime.Now</h5>
                 </div>
                 <div class="col-sm-6">
                     <input id="entryTitle" ng-model="title" placeholder="Journal Title"/>
@@ -21,12 +22,20 @@
             </div>
             <textarea id="journal" ng-model="body" autofocus></textarea>       
         </div>
-        <div class="colRight col-md-4">
-            <div id="dailyVs"></div>
-            <input id="search" ng-model="searchBible" class="form-control" type="search" placeholder="Search Verses" />
-            <br />
-            <button class="btn-success" ng-click="createEntry()">Save Journal Entry</button>
-            <button ng-click="verseSearch()">Search</button>
+        <div class="colRight col-md-4">        
+            <div id="dailyVs">
+                <p ng-bind-html="verse"></p>
+                <input id="search" ng-model="query.book" class="form-control" type="search" placeholder="Search Book" />
+                <br />
+                <br />
+                <input id="search" ng-model="query.chapter" class="form-control" type="number" min="1" placeholder="Search Chapter" />
+                <br />
+                <br />
+                <input id="search" ng-model="query.verse" class="form-control" type="number" min="1" placeholder="Search Verses" />
+                <br />
+                <br />
+                <button style="height: 2em" class="glyphicon glyphicon-search btn-info" ng-click="verseSearch()">Search</button>
+            </div>
         </div>
     </div>
 </div>

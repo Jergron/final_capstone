@@ -1,6 +1,6 @@
-﻿var app = angular.module("drip", []);
+﻿var app = angular.module("drip", ["ngSanitize"]);
 
-app.controller("TestController", ["$scope", "$http", "$window", function ($scope, $http, $window) {
+app.controller("TestController", ["$scope", "$http", "$window","$sce", function ($scope, $http, $window, $sce) {
 
     $scope.delete = function (id) {
         $http.delete("/api/DripScriptAPI/" + id)
@@ -52,18 +52,18 @@ app.controller("TestController", ["$scope", "$http", "$window", function ($scope
     }
 
     $scope.verseSearch = function () {
-        $params = {
-            "value": $scope.bibleSearch
-        }
-        $http.get("/api/DripScriptAPI/5", $scope.bibleSearch)
-            .success(function (data) {
-                console.log("data", data);
+
+        $http.post("/api/DripScriptAPI/search", $scope.query)
+            .then(function (response) {
+                var data = angular.fromJson(response.data)
+                var verse = data.response.search.result.passages[0].text;
+                $scope.verse = $sce.trustAsHtml(verse);            
             }); 
     }
 
     $scope.myJournal = function (id) {
         $http.get("/DripScript/MyJournal/" + id)
-            .success(function (data) {
+            .success(function (data) {              
                 console.log("data", data);
             });
     }
