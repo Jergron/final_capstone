@@ -34,6 +34,7 @@ namespace DripScript
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
                       "~/Scripts/angular.js",
                       "~/Scripts/angular-aria.js",
+                      "~/Scripts/angular-sanitize.js",
                       "~/Scripts/app.js"));
         }
     }
