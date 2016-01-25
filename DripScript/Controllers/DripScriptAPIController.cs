@@ -37,12 +37,12 @@ namespace DripScript.Controllers
         public string Get(QueryViewModel query)
         {
             string html = string.Empty;
-            string key = "";
+            string key = "anC4Qq15vtD7ZAd2y2poER47lzCaIYcAT7RRgegR";
             if (query != null)
             {
                 var uri = new Uri("https://bibles.org/v2/search.js?query="+ query.Book +" " + query.Chapter + ":" + query.Verse + "&version=eng-KJVA");
                 var cache = new CredentialCache();
-                cache.Add(uri, "Basic", new NetworkCredential(key, ""));
+                cache.Add(uri, "Basic", new NetworkCredential(key, "arst"));
                 HttpWebRequest request = (HttpWebRequest)WebRequest.Create(uri);
                 request.Credentials = cache;
                 request.AutomaticDecompression = DecompressionMethods.GZip;
