@@ -52,7 +52,6 @@ app.controller("TestController", ["$scope", "$http", "$window","$sce", function 
     }
 
     $scope.verseSearch = function () {
-
         $http.post("/api/DripScriptAPI/search", $scope.query)
             .then(function (response) {
                 var data = angular.fromJson(response.data)
